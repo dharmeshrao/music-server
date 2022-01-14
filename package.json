@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/dharmeshrao/music-server#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.6"
   }
 }
