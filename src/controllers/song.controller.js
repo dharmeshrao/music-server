@@ -5,7 +5,7 @@ router.post('/',async (req,res)=>{
   return res.status(200).send({song})
 })
 router.get('/' , async (req,res)=>{
-    const song = await Song.find().lean().exec();
+    const song = await Song.find().populate('album').lean().exec();
     return res.status(200).send({song})
 })
 module.exports = router;
