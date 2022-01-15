@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   let page = req.query.page || 1;
-  let limit = req.query.limit || 5;
+  let limit = req.query.limit || 8;
   let formula = (page - 1) * limit;
   const album = await Album.find()
     .skip(formula)
