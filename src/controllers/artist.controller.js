@@ -6,7 +6,7 @@ router.get('/:id' , async (req,res)=>{
 })
 
 router.patch('/:id' , async (req,res)=>{
-    const artist = await Artist.findByIdAndUpdate(req.params.id,req.body,{new: true}).populate('album')
+    const artist = await Artist.findByIdAndUpdate(req.params.id,req.body,{new: true}).populate('albums')
     return res.status(200).send({artist})
 })
 module.exports = router;
