@@ -5,11 +5,18 @@ router.post("/", async (req, res) => {
   return res.status(200).send({ album });
 });
 
-router.get("/", async (req, res) => {
+router.get("/data", async (req, res) => {
   let page = req.query.page || 1;
   let limit = req.query.limit || 8;
   let formula = (page - 1) * limit;
-  const album = await Album.find()
+  let q = req.query.name;
+  let c = req.query.genre;
+  let sbbkuch = new RegExp(c, "i");
+  let kucbhi = new RegExp(q, "i");
+  const album = await Album.find({
+    name: { $regex: kucbhi },
+    genre: { $regex: sbbkuch },
+  })
     .skip(formula)
     .limit(limit)
     .populate({
@@ -27,10 +34,13 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/search", async (req, res) => {
-  let q = req.query.q;
+  let q = req.query.name;
+  let c = req.query.genre;
+  let sbbkuch = new RegExp(c, "i");
   let kucbhi = new RegExp(q, "i");
   const album = await Album.find({
     name: { $regex: kucbhi },
+    genre: { $regex: sbbkuch },
   });
   return res.status(200).send({ album });
 });
