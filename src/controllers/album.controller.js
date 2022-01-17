@@ -9,12 +9,12 @@ router.get("/data", async (req, res) => {
   let page = req.query.page || 1;
   let limit = req.query.limit || 8;
   let formula = (page - 1) * limit;
-  let q = req.query.name;
+  let q = req.query.year;
   let c = req.query.genre;
   let sbbkuch = new RegExp(c, "i");
   let kucbhi = new RegExp(q, "i");
   const album = await Album.find({
-    name: { $regex: kucbhi },
+    year: {$regex: sbbkuch},
     genre: { $regex: sbbkuch },
   })
     .skip(formula)
