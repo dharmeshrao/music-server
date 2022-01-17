@@ -14,7 +14,7 @@ router.get("/data", async (req, res) => {
   let sbbkuch = new RegExp(c, "i");
   let kucbhi = new RegExp(q, "i");
   const album = await Album.find({
-    year: {$regex: sbbkuch},
+    year: {$regex: kucbhi},
     genre: { $regex: sbbkuch },
   })
     .skip(formula)
@@ -28,7 +28,7 @@ router.get("/data", async (req, res) => {
       select: "name duration",
     });
   const totalPage = await Album.find({
-    name: { $regex: kucbhi },
+    year: {$regex: kucbhi},
     genre: { $regex: sbbkuch },
   }).countDocuments();
   const showAll = Math.ceil(totalPage / limit);
