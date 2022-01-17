@@ -36,13 +36,10 @@ router.get("/data", async (req, res) => {
 });
 
 router.get("/search", async (req, res) => {
-  let q = req.query.name;
-  let c = req.query.genre;
-  let sbbkuch = new RegExp(c, "i");
+  let q = req.query.q;
   let kucbhi = new RegExp(q, "i");
   const album = await Album.find({
     name: { $regex: kucbhi },
-    genre: { $regex: sbbkuch },
   });
   return res.status(200).send({ album });
 });
