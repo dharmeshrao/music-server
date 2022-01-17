@@ -26,14 +26,14 @@ router.get("/", async (req, res) => {
   return res.status(200).send({ album, showAll });
 });
 
-router.get('/search' ,async (req, res)=>{
+router.get("/search", async (req, res) => {
   let q = req.query.q;
-  let kucbhi = new RegExp(q,"i")
+  let kucbhi = new RegExp(q, "i");
   const album = await Album.find({
-    name: {$regex : kucbhi}
-  })
-  return res.status(200).send({ album })
-})
+    name: { $regex: kucbhi },
+  });
+  return res.status(200).send({ album });
+});
 router.get("/:id", async (req, res) => {
   const album = await Album.findById(req.params.id).populate("songs").populate({
     path: "artist",
