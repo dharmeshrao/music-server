@@ -27,9 +27,11 @@ router.get("/data", async (req, res) => {
       path: "songs",
       select: "name duration",
     });
-  const totalPage = await Album.find().countDocuments();
+  const totalPage = await Album.find({
+    name: { $regex: kucbhi },
+    genre: { $regex: sbbkuch },
+  }).countDocuments();
   const showAll = Math.ceil(totalPage / limit);
-
   return res.status(200).send({ album, showAll });
 });
 
