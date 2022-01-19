@@ -11,11 +11,11 @@ router.get("/data", async (req, res) => {
   let formula = (page - 1) * limit;
   let q = req.query.year;
   let c = req.query.genre;
-  let sbbkuch = new RegExp(c, "i");
-  let kucbhi = new RegExp(q, "i");
+  let queryGenre = new RegExp(c, "i");
+  let queryYear = new RegExp(q, "i");
   const album = await Album.find({
-    year: {$regex: kucbhi},
-    genre: { $regex: sbbkuch },
+    year: { $regex: queryYear },
+    genre: { $regex: queryGenre },
   })
     .skip(formula)
     .limit(limit)
@@ -28,8 +28,8 @@ router.get("/data", async (req, res) => {
       select: "name duration",
     });
   const totalPage = await Album.find({
-    year: {$regex: kucbhi},
-    genre: { $regex: sbbkuch },
+    year: { $regex: queryYear },
+    genre: { $regex: queryGenre },
   }).countDocuments();
   const showAll = Math.ceil(totalPage / limit);
   return res.status(200).send({ album, showAll });
@@ -37,9 +37,9 @@ router.get("/data", async (req, res) => {
 
 router.get("/search", async (req, res) => {
   let q = req.query.q;
-  let kucbhi = new RegExp(q, "i");
+  let queryYear = new RegExp(q, "i");
   const album = await Album.find({
-    name: { $regex: kucbhi },
+    name: { $regex: queryYear },
   });
   return res.status(200).send({ album });
 });
